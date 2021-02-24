@@ -29,32 +29,31 @@ struct node * create_node (char s[])
    return p ;
 }
 
-void insert_node (struct node * l , struct node * p)
-{
-   struct node * temp = l, *a ; 
-   
+void insert_node (struct linkedlist * a[] , struct node * p , int index )
+{  
    printf("string in the node :: %s \n", p->word);
    
-   if (temp ==  NULL )
+   if (a[index]->head  ==  NULL )
    {
-       temp =  p ;
+       a[index]->head =  p ;
        
-       printf("string stored in the head :: %s \n",temp->word );
+       printf("string stored in the head :: %s \n",a[index]->head->word );
        return ;
    }
-   
+
    else
-   {
+   {  
+      struct node * temp = a[index]->head , *temp1  ;
       while (temp != NULL )
       {   
-          a = temp ;
+          temp1  = temp ;
           if (strcmp(temp->word , p->word) == 0)
              return ;
           
           temp =temp->next ;
       }
       
-      a->next =  p ;
+      temp1 ->next =  p ;
           
    }
 }
@@ -90,8 +89,7 @@ int main()
       
       printf("index :: %d \n",index);
       
-      insert_node (a[index]->head ,create_node (s));
-      
+      insert_node (a ,create_node (s), index );   
       
    }while (ch != '\n');
    
@@ -116,7 +114,5 @@ int main()
           
           printf("%s\n",temp->word );
       }
-   }
-   
-   
+   }  
 }
