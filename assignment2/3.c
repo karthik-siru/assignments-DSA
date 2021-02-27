@@ -37,8 +37,6 @@ void insert_node (struct linkedlist * a[] , struct node * p , int index )
    if (a[index]->head  ==  NULL )
    {
        a[index]->head =  p ;
-
-       printf("head null case \n");
        return ;
    }
    
@@ -46,7 +44,6 @@ void insert_node (struct linkedlist * a[] , struct node * p , int index )
    {   
        p->next =  temp ; 
        a[index]->head  =  p  ;
-       printf("only one node case \n");
        return ;
    }
 
@@ -69,13 +66,11 @@ void insert_node (struct linkedlist * a[] , struct node * p , int index )
       {
           temp1->next = p ;
           p->next =  temp ;
-          printf("in between case \n");
           return ;
       }
       else
       {
           temp1->next =  p ;
-          printf("adding at the last \n");
           return ;
       }     
    }
@@ -84,8 +79,6 @@ void insert_node (struct linkedlist * a[] , struct node * p , int index )
 int idx( char s[] )
 {
    int a[8] , i , index = 0;
-
-   printf("in index function \n");
 
    for( i =0; i< 8 ;i++)
    {
@@ -159,15 +152,11 @@ int main()
        a[i]->head = NULL ;
    }
 
-   printf("safe after loading \n");
-   
    char s[50] ;
    
    while(k > 0)
    {
       scanf("%s",s);
-
-      printf("let's see now \n");
       
       index = idx(s);
       
