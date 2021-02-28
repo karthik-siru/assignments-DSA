@@ -8,6 +8,8 @@ struct node
     struct node * right ;
 };
 
+//creating a bst 
+
 struct bst 
 {
   struct node * root ;
@@ -71,19 +73,54 @@ int found (struct node * node , int l)
     return (0);
 }
 
-int max_value (struct node * root , int l , int r , int k )
+struct node * SEARCH (struct node * root , int k )
 {
-     struct node * temp =  root ;     
+   struct node * temp = root ; 
+   
+   while (temp)
+   {
+      if (temp->a <  k )
+      {
+         temp = temp->right ;
+      }
+      else if ( temp->a ==  k )
+      {
+         return  temp ;
+      }
+      else
+      {
+         temp = temp->left ;
+      }
+   }
+
+}
+int max_value (struct node * root , int l , int r )
+{
+     struct node * temp =  root , *temp1 , *temp2 ;     
      int a, b , m  ; 
- 
-     m =  l > r ? l : r ;
      
-     if (m ==  temp->a )
+     temp1 = SEARCH(root,r) ;
+     temp2 = SEARCH (root , l);
+     
+     if (found (temp1->left , l) )
      {
-         return temp->a ; 
+         temp1 = temp1->left ;
+         
+         while (temp1 != temp2 )
+         {
+             if (temp1->a > temp2->a )
+                 return temp1->a ;
+             else 
+             {   
+                 m =  temp1->a ;
+                 temp1 =  temp1->right ; 
+             }
+         }
+         
+         return m ;
      }
-     
-     while ( temp && k )
+   
+     while ( temp )
      {   
         a = found (temp->left , l) ;
         b = found (temp->right , r);
@@ -91,24 +128,30 @@ int max_value (struct node * root , int l , int r , int k )
         if (!(a) && b )
             temp = temp->right ;
 
-        if (a && !(b))
+        else if (a && !(b))
             temp = temp->left ;
  
-        if ( a && b )
-            break ;
-            
-        k--; 
+        else
+            break ;          
      }
+     
      
      while (temp )
      {
         if (temp->a < r)
+        {
+            m  = temp->a ;
             temp = temp->right ;
-        else  
+        }
+        else 
              break ;
      }
      
-     return temp->a ;     
+     if (temp->a ==  r )
+       return m;  
+       
+     else 
+       return temp->a  ;  
 }
 
 int main()
@@ -116,7 +159,7 @@ int main()
    
    char ch ;
    
-   int  k , l, r , max , i , count = 0;
+   int  k , l, r , max , i ,temp;
    
    struct bst * t ; 
    
@@ -128,13 +171,19 @@ int main()
    {  
       scanf("%d%c",&k,&ch);
       insert (t,create_node (k));
-      count ++ ;
    }
    while (ch != '\n');
 
    scanf("%d%d",&l,&r);
+   
+   if (l > r)
+   {
+      temp =  l ;
+      l =  r;
+      r = temp ;
+   }
 
-   max = max_value (t->root , l ,r , count );
+   max = max_value (t->root , l ,r );
  
    printf("%d\n",max);
    

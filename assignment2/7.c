@@ -34,7 +34,7 @@ struct node * build_tree (int left , int right , int *arr ,struct node * temp)
    if (left >= right )
       return NULL ;
       
-   int mid =  (left+right )/2 ;
+   int mid =  ( left + right - 1 )/2 ;
    
    temp = CREATE_NODE(arr[mid]);
    
