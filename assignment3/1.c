@@ -6,7 +6,7 @@ struct node{
     int key ;
     struct node *left ;
     struct node *right ;
-    int height ;    
+    int height ;
 };
 
 struct avl_tree{
@@ -41,17 +41,17 @@ struct node * search(struct avl_tree *t , int k)
           return temp ;
        else if ( temp->key < k )
           temp = temp->right;
-       else 
-          temp = temp->left ; 
+       else
+          temp = temp->left ;
    }
-   return NULL ; 
+   return NULL ;
 }
 
 int get_balance(struct node *x){
 
     if (x == NULL)
        return 0;
-    else 
+    else
        return height(x->left) -height(x->right);
 }
 
@@ -60,19 +60,19 @@ struct node * Maximum (struct node * x)
     struct node * temp = x ;
 
     while (temp->right)
-        temp = temp->right ; 
-    return temp; 
+        temp = temp->right ;
+    return temp;
 }
 
 struct node *  Minimum (struct node * a)
 {
     struct node *temp = a ;
-    
+
     while (temp->left != NULL )
     {
-        temp->left ;
+        temp= temp->left ;
     }
-    
+
     return temp;
 }
 
@@ -80,15 +80,15 @@ int isbst (struct node * l )
 {
     if (l == NULL )
          return 1 ;
-    
+
     if ( l->left != NULL &&  l->key < Maximum(l->left)->key )
       return 0 ;
-      
+
     if ( l->right != NULL &&  l->key > Minimum(l->right)->key)
       return 0 ;
-      
+
     if (!isbst(l->left) || !isbst(l->right))
-       return 0; 
+       return 0;
 
 
     return 1 ;
@@ -102,7 +102,7 @@ int isavl(struct node * a)
         {
              int k = get_balance(a);
 
-             if (isavl(a->left) && isavl(a->right)) 
+             if (isavl(a->left) && isavl(a->right))
              {
                 if (k <= 1 && k >= -1)
                     return 1 ;
@@ -111,24 +111,24 @@ int isavl(struct node * a)
         else
             return 0 ;
     }
-    else 
+    else
        return 0 ;
 }
 
 struct node * left_rotate( struct node *x )
-{  
+{
    struct node *y = x->right ;
    struct node *temp = y->left ;
 
-   y->left   = x ; 
+   y->left   = x ;
    x->right  = temp ;
 
-   //storing heights 
+   //storing heights
    int h1 = height( x->right) , h2 = height(x->left);
    x->height = h1 > h2 ? h1+1 : h2+1 ;
    y->height = height(y->left) > height(y->right) ? height(y->left)+1 : height(y->right) +1 ;
-    
-   return y ; 
+
+   return y ;
 }
 
 struct node * right_rotate(struct node *y)
@@ -144,19 +144,20 @@ struct node * right_rotate(struct node *y)
    y->height = h1 > h2 ? h1+1 : h2 +1 ;
    x->height = height(x->left) > height(x->right) ? height(x->left)+1 : height(x->right) +1 ;
 
-   return x;   
+   return x;
 }
 
 struct node * insert( struct node *node , int k1 )
 {
-    if (!node)
+    if (node == NULL)
         return create_node(k1);
+
     else if( k1 < node->key )
         node->left  = insert(node->left ,k1);
-    else 
+    else
         node->right = insert(node->right ,k1);
 
-    node->height = height(node->left) > height(node->right) ? height(node->left)+1 : height(node->right) + 1 ; 
+    node->height = height(node->left) > height(node->right) ? height(node->left)+1 : height(node->right) + 1 ;
 
     int k = get_balance(node);
 
@@ -174,103 +175,116 @@ struct node * insert( struct node *node , int k1 )
         node->right = right_rotate(node->right);
         return left_rotate(node);
     }
-    return node ; 
+    return node ;
 }
 
-struct node * delete( struct node*a, struct node * x)
+struct node * delete( struct node*node, int key)
 {
-    if (!a)
-        return NULL ;
-    else if (a->key > x->key )
-       a->left = delete(a->left , x);
-    else if (a->key < x->key )
-       a->right = delete (a->right , x);
-    else  // if we found the required node 
+    if (!node)
+       return node ;
+
+    if (key  < node->key)
+       node->left = delete(node->left , key);
+
+    else if ( key > node->key )
+       node->right = delete(node->right , key);
+
+    else
     {
-        if (!a->left && !a->right)
-           return NULL;
-        else if (!a->left)
+
+        if (node->left == NULL || node->right == NULL) // one child or no child case
         {
-            a = a->right ;
-            return a ;
+            struct node * temp =  node->left ? node->left : node->right ;
+
+            if (temp  == NULL )
+            {
+                temp = node ;
+                node = NULL ;
+            }
+
+            else
+            {
+              *node = *temp ;
+            }
+
+            free(temp);
         }
-        else if (!a->right)
+
+        else
         {
-            a = a->left ;
-            return a ;
-        }
-        else // when both the childs are present .. max value from 
-        {
-            struct node * y = Maximum(a->left);
-            struct node * z = delete(a->left, y);
-            y->right = a->right ;
-            y->left = z ;
-            *a = *y  ;
+            struct node * temp = Minimum(node->right);
+
+            node->key  = temp->key ;
+
+            node->right = delete(node->right , temp->key);
         }
     }
-    // updating the heights from here 
 
-    if (a == NULL)
-        return NULL ;
-    int h1 = height(a->left), h2 = height(a->right);
+    if (node == NULL)
+       return node ;
 
-    a->height =  h1 > h2 ? h1+1 : h2+1 ;
+    node->height = height(node->left) > height(node->right) ? height(node->left)+1 : height(node->right)+1 ;
 
-    int k = get_balance(a);
+    int b = get_balance(node);
 
-    if (k > 1 && get_balance(a->left)>=0) // left child
-          return right_rotate(a);
-    if (k > 1 && get_balance(a->left)< 0) // left right case
+    if (b > 1 && get_balance(node->left) >= 0)
+        return right_rotate(node);
+
+    // Left Right Case
+    if (b > 1 && get_balance(node->left) < 0)
     {
-        a->left = left_rotate(a->left);
-        return right_rotate(a);
+        node->left =  left_rotate(node->left);
+        return right_rotate(node);
     }
-    if (k < -1 && get_balance(a->right)<=0) // right child
-          return left_rotate(a);
-    if (k < -1 && get_balance(a->right)> 0) // right left  case
+
+    // Right Right Case
+    if (b < -1 && get_balance(node->right) <= 0)
+        return left_rotate(node);
+
+    //
+    if (b < -1 && get_balance(node->right) > 0)
     {
-        a->right = right_rotate(a->right);
-        return left_rotate(a);
+        node->right = right_rotate(node->right);
+        return left_rotate(node);
     }
-    return a ;
-    
+
+    return node;
+
 }
 
 void Print_Tree(struct node *root)
-{    
-     struct node * temp = root ;
-     
+{
      printf("( ");
-     
-     if (temp == NULL )
+
+     if (root == NULL )
      {
         printf(") ");
      }
-     
+
      else
      {
-        printf("%d ",temp->key);
-        
-        Print_Tree(temp->left);
-        
-        Print_Tree(temp->right);
-        
+        printf("%d ",root->key);
+
+        Print_Tree(root->left);
+
+        Print_Tree(root->right);
+
         printf(") ");
      }
 }
 
 int main()
 {
-     char c ; 
+     char c ;
      int k , a = 0 ;
-     
-     struct node *temp ; 
+
+     struct node *temp ;
      struct avl_tree *t ;
      t = (struct avl_tree*) malloc(sizeof(struct avl_tree));
      t->root = NULL ;
 
     while (1)
-    {   
+    {
         scanf("%c",&c);
         switch(c)
         {
@@ -283,9 +297,9 @@ int main()
             scanf("%d",&k);
             temp = search(t,k);
             if(temp)
-            {   
+            {
                 printf("%d\n",temp->key);
-                delete (t->root , temp);
+                t->root = delete (t->root , temp->key);
             }
             else
                 printf("FALSE\n");
@@ -314,7 +328,10 @@ int main()
             break;
 
             case 'e':
-            exit(1);     
+            a = 1;
         }
-    } 
+
+        if (a == 1)
+         break ;
+    }
 }
