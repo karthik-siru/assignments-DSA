@@ -6,7 +6,7 @@ ________________________________________________________________________________
 
 ASSIGNMENT 1  :
 
-Read the pdf for detailed questions .
+Read the below provided pdf for detailed questions .
 
 <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment1/CS2094D_Assignment_1_new.pdf"> Pdf file of Assignment 1 questions </a>
 
@@ -23,7 +23,7 @@ ________________________________________________________________________________
 
 ASSIGNMENT 2  :
 
-Read the pdf for detailed questions .
+Read the below provided pdf for detailed questions .
 
 <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment2/CS2094D_Assignment_2_updated.pdf"> Pdf file of Assignment 2 questions </a>
 
@@ -34,6 +34,21 @@ Read the pdf for detailed questions .
 5. <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment2/5.c"> BST without parent feild  </a>
 6. <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment2/6.c"> Max-Element in the path from node a to node b in BST </a>
 7. <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment2/7.c"> Construct height balanced tree from an ascending order array in O(nlogn) time comp </a>
+
+________________________________________________________________________________________________
+
+_______________________________________________________________________________________________
+
+ASSIGNMENT 3  :
+
+Read the below provided pdf for detailed questions .
+
+<a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment3/CS2094D_Assignment_3_.pdf"> Pdf file of Assignment 3 questions </a>
+
+1. <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment3/1.c"> AVL Tree Implementation in C </a>
+2. <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment3/2.c"> AVL-TREE Sort  </a>
+3. <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment3/3.c"> Red-Black Trees Implementation in C ( without parent feild in the node)</a>
+4. <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment3/4.c"> Binomial Heaps Implementation in C </a>
 
 ________________________________________________________________________________________________
 
