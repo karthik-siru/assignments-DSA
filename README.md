@@ -61,7 +61,9 @@ Read the below provided pdf for detailed questions .
 <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment4/CS2094D_Assignment_4_updated.pdf"> Pdf file of Assignment 4 questions </a>
 
  1 <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment4/1.c"> ADJ.Representation in C </a> <br>
+ 2 <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment4/2.c"> Prims_Algorithm in C </a><br>
  4 <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment4/4.c"> BFS and DFS in C  </a><br>
+ 5 <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment4/5.c"> Negative Cycle -Detection in a Graph </a><br>
  6 <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment4/6.c"> Fibonnaci Heaps implementation in C</a><br>
  7 <a href = "https://github.com/karthik-siru/assignments-DSA/blob/master/assignment4/7.c"> Disjoint Sets Implementation in C </a><br>
 
